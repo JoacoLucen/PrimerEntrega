@@ -1,4 +1,6 @@
 import random
+import sys
+
 # Preguntas para el juego
 questions = [
     "¿Qué función se usa para obtener la longitud de una cadena en Python?",
@@ -32,15 +34,33 @@ for _ in range(3):
         print(f"{i + 1}. {answer}")
     # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
-        user_answer = int(input("Respuesta: ")) - 1
-    # Se verifica si la respuesta es correcta
-        if user_answer == correct_answers_index[question_index]:
-            print("¡Correcto!")
-            break
+        user_answer = input("Respuesta: ")
+        #Evalua si lo ingresado es un numero, en caso de no serlo el programa termina
+        if str.isnumeric(user_answer) == False:
+            print ("Respuesta no valida")
+            sys.exit(1)
         else:
-# Si el usuario no responde correctamente después de 2 intentos,
-# se muestra la respuesta correcta
-            print("Incorrecto. La respuesta correcta es:")
-            print(answers[question_index][correct_answers_index[question_index]])
+            #Aca el input es un numero
+            user_answer = (int(user_answer)) - 1
+            #Evalua si lo ingresado pertenece a las opciones, sino se termina el programa
+            if user_answer < 0 or user_answer > 3:
+                print ("Respuesta no valida")
+                sys.exit(1)
+            else:
+                #Verifica si la respuesta es correcta
+                if user_answer == correct_answers_index[question_index]:
+                    print ("Respuesta correcta!")
+                    break
+                else:
+                    if intento == 0:
+                        print ("Incorrecto. Proba de nuevo")
+                    else:
+                    # Si el usuario no responde correctamente después de 2 intentos,
+                    # se muestra la respuesta correcta
+                        print("Incorrecto. La respuesta correcta es:")
+                        print(answers[question_index][correct_answers_index[question_index]])
+    else:
+        continue
+    break
 # Se imprime un blanco al final de la pregunta
 print()
