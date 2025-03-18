@@ -25,6 +25,7 @@ answers = [
 # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
 # El usuario deberá contestar 3 preguntas
+punctuation = 0
 for _ in range(3):
     # Se selecciona una pregunta aleatoria
     question_index = random.randint(0, len(questions) - 1)
@@ -50,17 +51,18 @@ for _ in range(3):
                 #Verifica si la respuesta es correcta
                 if user_answer == correct_answers_index[question_index]:
                     print ("Respuesta correcta!")
+                    punctuation += 1
                     break
                 else:
                     if intento == 0:
                         print ("Incorrecto. Proba de nuevo")
+                        punctuation -= 0.5
                     else:
                     # Si el usuario no responde correctamente después de 2 intentos,
                     # se muestra la respuesta correcta
                         print("Incorrecto. La respuesta correcta es:")
                         print(answers[question_index][correct_answers_index[question_index]])
-    else:
-        continue
-    break
+
 # Se imprime un blanco al final de la pregunta
+print ("Su puntuacion es: ", punctuation)
 print()
